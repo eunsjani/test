@@ -30,6 +30,9 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
             _currentIndex = index;
           });
         },
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: const Color(0xFF009C38),
+        unselectedItemColor: Colors.grey,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
