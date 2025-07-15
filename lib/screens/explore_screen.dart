@@ -283,7 +283,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
     final cardWidth = isMobile ? 160.0 : 190.0;
     final cardHeight = isMobile ? 240.0 : 280.0;
     final bgHeight = isMobile ? 160.0 : 190.0;
-    final imageSize = isMobile ? 60.0 : 79.0;
+    final imageSize = isMobile ? 72.0 : 95.0; // 1.2배 증가
     final statsWidth = isMobile ? 135.0 : 162.0;
     final statsHeight = isMobile ? 80.0 : 99.0;
     
@@ -808,7 +808,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                 child: SizedBox(
                   width: isMobile ? null : 300,
                   child: Text(
-                    '지금까지 당신의 기부는 이렇게 흘러왔어요',
+                    isMobile ? '지금까지 당신의 기부는\n이렇게 흘러왔어요' : '지금까지 당신의 기부는 이렇게 흘러왔어요',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
                       fontSize: isMobile ? 24 : 32,
@@ -817,6 +817,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                       height: 1.3,
                       letterSpacing: isMobile ? -0.6 : -0.8,
                     ),
+                    textAlign: TextAlign.left,
                   ),
                 ),
               ),

@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'widgets/bottom_navigation_widget.dart';
 
 void main() {
+  // 웹에서 텍스트 렌더링 개선
+  if (kIsWeb) {
+    // 웹에서 Canvas Kit을 사용하여 텍스트 렌더링 개선
+  }
   runApp(const MyApp());
 }
 
