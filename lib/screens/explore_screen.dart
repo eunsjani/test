@@ -110,7 +110,6 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                                       Text(
                                         '추천',
                                         style: TextStyle(
-                                          fontFamily: 'Pretendard',
                                           fontSize: isMobile ? 16 : 16,
                                           fontWeight: selectedTabIndex == 0 ? FontWeight.w600 : FontWeight.w500,
                                           color: selectedTabIndex == 0 ? const Color(0xFF1C1B1F) : const Color(0xFF969696),
@@ -145,7 +144,6 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                                     child: Text(
                                       '직접 찾기',
                                       style: TextStyle(
-                                        fontFamily: 'Pretendard',
                                         fontSize: isMobile ? 16 : 16,
                                         fontWeight: selectedTabIndex == 1 ? FontWeight.w600 : FontWeight.w500,
                                         color: selectedTabIndex == 1 ? const Color(0xFF1C1B1F) : const Color(0xFF969696),
@@ -203,7 +201,6 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                               Text(
                                 '남은 기부금 5,300원',
                                 style: TextStyle(
-                                  fontFamily: 'Pretendard',
                                   fontSize: isMobile ? 11 : 12,
                                   fontWeight: FontWeight.w500,
                                   color: const Color(0xFF969696),
@@ -215,8 +212,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                                   Text(
                                     '지금 사용',
                                     style: TextStyle(
-                                      fontFamily: 'Pretendard',
-                                      fontSize: isMobile ? 11 : 12,
+                                          fontSize: isMobile ? 11 : 12,
                                       fontWeight: FontWeight.w500,
                                       color: const Color(0xFF969696),
                                       letterSpacing: -0.3,
@@ -226,9 +222,8 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                                   Text(
                                     '5,200원',
                                     style: TextStyle(
-                                      fontFamily: 'Pretendard',
-                                      fontSize: isMobile ? 18 : 20,
-                                      fontWeight: FontWeight.bold,
+                                          fontSize: isMobile ? 18 : 20,
+                                      fontWeight: FontWeight.w700,
                                       color: const Color(0xFF1C1B1F),
                                       letterSpacing: -0.5,
                                     ),
@@ -255,9 +250,8 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                               child: Text(
                                 '이대로 기부하기',
                                 style: TextStyle(
-                                  fontFamily: 'Pretendard',
                                   fontSize: isMobile ? 14 : 16,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w700,
                                   color: Colors.white,
                                   letterSpacing: -0.4,
                                 ),
@@ -341,7 +335,6 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                   Text(
                     '내 기부금의',
                     style: TextStyle(
-                      fontFamily: 'Pretendard',
                       fontSize: isMobile ? 13 : 15,
                       fontWeight: FontWeight.w600,
                       color: const Color(0xFF969696),
@@ -352,7 +345,6 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                   Text(
                     '$percentage 전달',
                     style: TextStyle(
-                      fontFamily: 'Pretendard',
                       fontSize: isMobile ? 20 : 24,
                       fontWeight: FontWeight.w600,
                       color: const Color(0xFF1C1B1F),
@@ -383,9 +375,8 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                 child: Text(
                   title,
                   style: TextStyle(
-                    fontFamily: 'Pretendard',
                     fontSize: isMobile ? 14 : 16,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                     color: color,
                     letterSpacing: -0.4,
                   ),
@@ -426,9 +417,8 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                     child: Text(
                       number,
                       style: const TextStyle(
-                        fontFamily: 'Pretendard',
                         fontSize: 14,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
                         color: Colors.white,
                         letterSpacing: -0.35,
                       ),
@@ -439,9 +429,8 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                 Text(
                   category,
                   style: const TextStyle(
-                    fontFamily: 'Pretendard',
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                     color: Color(0xFF1C1B1F),
                     letterSpacing: -0.5,
                   ),
@@ -459,9 +448,8 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                   child: Text(
                     '남은 기부금의 $percentage',
                     style: TextStyle(
-                      fontFamily: 'Pretendard',
                       fontSize: 12,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w700,
                       color: color,
                       letterSpacing: -0.3,
                     ),
@@ -471,9 +459,8 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                 Text(
                   amount,
                   style: const TextStyle(
-                    fontFamily: 'Pretendard',
                     fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                     color: Color(0xFF1C1B1F),
                     letterSpacing: -0.4,
                   ),
@@ -621,9 +608,8 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                                 Text(
                                   '매칭률 87%',
                                   style: TextStyle(
-                                    fontFamily: 'Pretendard',
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.bold,
+                                      fontSize: 13,
+                                    fontWeight: FontWeight.w700,
                                     color: category == '환경' ? const Color(0xFF009C38)
                                            : category == '동물' ? const Color(0xFF3E85FF)
                                            : const Color(0xFFFF9000),
@@ -639,9 +625,8 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                             child: Text(
                               '우리는 지금, 마지막 고래를 보고 있을지도 모릅니다',
                               style: TextStyle(
-                                fontFamily: 'Pretendard',
                                 fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w700,
                                 color: Color(0xFF1C1B1F),
                                 letterSpacing: -0.5,
                                 height: 1.4,
@@ -675,8 +660,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                                   child: Text(
                                     '환경운동연합',
                                     style: TextStyle(
-                                      fontFamily: 'Pretendard',
-                                      fontSize: 16,
+                                          fontSize: 16,
                                       fontWeight: FontWeight.w600,
                                       color: Color(0xFF969696),
                                       letterSpacing: -0.4,
@@ -714,6 +698,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                             },
                             child: Container(
                               height: 60,
+                              width: double.infinity,
                               padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 18),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -721,8 +706,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                                   const Text(
                                     '소중한 기부금 이렇게 사용합니다',
                                     style: TextStyle(
-                                      fontFamily: 'Pretendard',
-                                      fontSize: 15,
+                                          fontSize: 15,
                                       fontWeight: FontWeight.w500,
                                       color: Color(0xFF969696),
                                       letterSpacing: -0.375,
@@ -753,8 +737,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                                     child: Text(
                                       '고래 서식지 현장 조사\n7,000,000원\n해양포유류보호법 제정을 위한 국회 토론회\n2,000,000원\n생태보전 활동가 활동비 (3개월)\n6,000,000원',
                                       style: TextStyle(
-                                        fontFamily: 'Pretendard',
-                                        fontSize: 16,
+                                              fontSize: 16,
                                         fontWeight: FontWeight.w600,
                                         color: Color(0xFF969696),
                                         letterSpacing: -0.4,
@@ -769,8 +752,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                                     child: Text(
                                       '자세히 보기',
                                       style: TextStyle(
-                                        fontFamily: 'Pretendard',
-                                        fontSize: 15,
+                                              fontSize: 15,
                                         fontWeight: FontWeight.w500,
                                         color: Color(0xFF969696),
                                         letterSpacing: -0.375,
@@ -816,7 +798,6 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                   child: Text(
                     isMobile ? '지금까지 당신의 기부는\n이렇게 흘러왔어요' : '지금까지 당신의 기부는 이렇게 흘러왔어요',
                     style: TextStyle(
-                      fontFamily: 'Pretendard',
                       fontSize: isMobile ? 24 : 32,
                       fontWeight: FontWeight.w600,
                       color: const Color(0xFF1C1B1F),
@@ -891,7 +872,6 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                   child: Text(
                     '나에게 딱 맞는 이달의 기부',
                     style: TextStyle(
-                      fontFamily: 'Pretendard',
                       fontSize: isMobile ? 12 : 14,
                       fontWeight: FontWeight.w600,
                       color: const Color(0xEDFFFFFF),
@@ -970,7 +950,6 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
           const Text(
             '관심 있는 분야를 직접 찾아보세요',
             style: TextStyle(
-              fontFamily: 'Pretendard',
               fontSize: 32,
               fontWeight: FontWeight.w600,
               color: Color(0xFF1C1B1F),
@@ -996,8 +975,8 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
               decoration: InputDecoration(
                 hintText: '기부처 또는 키워드를 검색해보세요',
                 hintStyle: const TextStyle(
-                  fontFamily: 'Pretendard',
                   fontSize: 16,
+                  fontWeight: FontWeight.w500,
                   color: Color(0xFF969696),
                   letterSpacing: -0.4,
                 ),
@@ -1021,7 +1000,6 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
           const Text(
             '카테고리별 찾기',
             style: TextStyle(
-              fontFamily: 'Pretendard',
               fontSize: 20,
               fontWeight: FontWeight.w600,
               color: Color(0xFF1C1B1F),
@@ -1048,7 +1026,6 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
           const Text(
             '인기 기부처',
             style: TextStyle(
-              fontFamily: 'Pretendard',
               fontSize: 20,
               fontWeight: FontWeight.w600,
               color: Color(0xFF1C1B1F),
@@ -1074,7 +1051,6 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
       child: Text(
         label,
         style: TextStyle(
-          fontFamily: 'Pretendard',
           fontSize: 14,
           fontWeight: FontWeight.w500,
           color: color,
@@ -1131,7 +1107,6 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                 Text(
                   organizations[index]['name']!,
                   style: const TextStyle(
-                    fontFamily: 'Pretendard',
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: Color(0xFF1C1B1F),
@@ -1142,8 +1117,8 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                 Text(
                   organizations[index]['description']!,
                   style: const TextStyle(
-                    fontFamily: 'Pretendard',
                     fontSize: 14,
+                    fontWeight: FontWeight.w500,
                     color: Color(0xFF969696),
                     letterSpacing: -0.35,
                   ),

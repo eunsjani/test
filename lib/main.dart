@@ -23,63 +23,63 @@ class MyApp extends StatelessWidget {
         textTheme: const TextTheme(
           displayLarge: TextStyle(
             fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w700, // Bold
           ),
           displayMedium: TextStyle(
             fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w700, // Bold
           ),
           displaySmall: TextStyle(
             fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w600, // SemiBold
           ),
           headlineLarge: TextStyle(
             fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w700, // Bold
           ),
           headlineMedium: TextStyle(
             fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w600, // SemiBold
           ),
           headlineSmall: TextStyle(
             fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w600, // SemiBold
           ),
           titleLarge: TextStyle(
             fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w600, // SemiBold
           ),
           titleMedium: TextStyle(
             fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w500, // Medium
           ),
           titleSmall: TextStyle(
             fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w500, // Medium
           ),
           bodyLarge: TextStyle(
             fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w500, // Medium
           ),
           bodyMedium: TextStyle(
             fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w500, // Medium
           ),
           bodySmall: TextStyle(
             fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w500, // Medium
           ),
           labelLarge: TextStyle(
             fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w500, // Medium
           ),
           labelMedium: TextStyle(
             fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w500, // Medium
           ),
           labelSmall: TextStyle(
             fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w500, // Medium
           ),
         ),
       ),
