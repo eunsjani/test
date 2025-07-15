@@ -12,11 +12,11 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
   // 상단 토글 상태 관리 (0: 추천, 1: 직접 찾기)
   int selectedTabIndex = 0;
   
-  // 선택된 카드들을 관리하는 Map
-  Map<String, List<int>> selectedCards = {
-    '아동/어린이': [1], // 두 번째 카드가 선택된 상태
-    '환경': [0],
-    '동물': [0],
+  // 선택된 카드들을 관리하는 Map (각 카테고리별로 하나씩만 선택 가능)
+  Map<String, int?> selectedCards = {
+    '아동/어린이': 1, // 두 번째 카드가 선택된 상태
+    '환경': 0,
+    '동물': 0,
   };
 
   // 펼쳐진 카드들을 관리하는 Map
@@ -38,7 +38,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                 final isMobile = constraints.maxWidth < 768;
                 return Column(
                   children: [
-                    SizedBox(height: isMobile ? 100 : 122),
+                    SizedBox(height: isMobile ? 100 : 110),
                     // 선택된 탭에 따른 컨텐츠 표시
                     if (selectedTabIndex == 0) _buildRecommendedContent(isMobile: isMobile),
                     if (selectedTabIndex == 1) _buildDirectSearchContent(),
@@ -56,13 +56,14 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
               builder: (context, constraints) {
                 final isMobile = constraints.maxWidth < 768;
                 return Container(
-                  height: isMobile ? 108 : 130,
+                  height: isMobile ? 100 : 110,
                   color: const Color(0xFFF6F6F6),
                   child: Column(
                     children: [
-                      SizedBox(height: isMobile ? 50 : 65),
+                      SizedBox(height: isMobile ? 40 : 48),
                       // Tab Bar Style
                       Container(
+                        height: isMobile ? 50 : 52,
                         width: double.infinity,
                         decoration: const BoxDecoration(
                           border: Border(
@@ -83,7 +84,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                                   });
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(vertical: isMobile ? 12 : 16),
+                                  height: double.infinity,
                                   decoration: BoxDecoration(
                                     border: Border(
                                       bottom: BorderSide(
@@ -92,6 +93,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                                       ),
                                     ),
                                   ),
+                                  margin: const EdgeInsets.only(bottom: -1),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -109,7 +111,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                                         '추천',
                                         style: TextStyle(
                                           fontFamily: 'Pretendard',
-                                          fontSize: isMobile ? 16 : 18,
+                                          fontSize: isMobile ? 16 : 16,
                                           fontWeight: selectedTabIndex == 0 ? FontWeight.w600 : FontWeight.w500,
                                           color: selectedTabIndex == 0 ? const Color(0xFF1C1B1F) : const Color(0xFF969696),
                                           letterSpacing: -0.4,
@@ -129,7 +131,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                                   });
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(vertical: isMobile ? 12 : 16),
+                                  height: double.infinity,
                                   decoration: BoxDecoration(
                                     border: Border(
                                       bottom: BorderSide(
@@ -138,15 +140,17 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                                       ),
                                     ),
                                   ),
-                                  child: Text(
-                                    '직접 찾기',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontFamily: 'Pretendard',
-                                      fontSize: isMobile ? 14 : 16,
-                                      fontWeight: selectedTabIndex == 1 ? FontWeight.w600 : FontWeight.w500,
-                                      color: selectedTabIndex == 1 ? const Color(0xFF1C1B1F) : const Color(0xFF969696),
-                                      letterSpacing: -0.4,
+                                  margin: const EdgeInsets.only(bottom: -1),
+                                  child: Center(
+                                    child: Text(
+                                      '직접 찾기',
+                                      style: TextStyle(
+                                        fontFamily: 'Pretendard',
+                                        fontSize: isMobile ? 16 : 16,
+                                        fontWeight: selectedTabIndex == 1 ? FontWeight.w600 : FontWeight.w500,
+                                        color: selectedTabIndex == 1 ? const Color(0xFF1C1B1F) : const Color(0xFF969696),
+                                        letterSpacing: -0.4,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -488,7 +492,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
               child: _buildFigmaDonationCard(
                 index: index,
                 category: category,
-                isSelected: selectedCards[category]?.contains(index) ?? false,
+                isSelected: selectedCards[category] == index,
                 isExpanded: expandedCards[category]?.contains(index) ?? false,
                 borderColor: color,
                 checkColor: color,
@@ -519,14 +523,8 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
           child: GestureDetector(
             onTap: () {
               setState(() {
-                if (isSelected) {
-                  selectedCards[category]?.remove(index);
-                } else {
-                  if (selectedCards[category] == null) {
-                    selectedCards[category] = [];
-                  }
-                  selectedCards[category]!.add(index);
-                }
+                // 각 카테고리에서 하나씩만 선택 가능
+                selectedCards[category] = selectedCards[category] == index ? null : index;
               });
             },
             child: Container(
@@ -554,232 +552,240 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
         ),
         // 오른쪽 카드 내용
         Expanded(
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(4),
-            ),
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                // 카드 전체를 클릭했을 때도 선택 가능
+                selectedCards[category] = selectedCards[category] == index ? null : index;
+              });
+            },
             child: Container(
               decoration: BoxDecoration(
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(4),
-                border: isSelected 
-                    ? Border.all(
-                        color: category == '환경' ? const Color(0xFF009C38) 
-                               : category == '동물' ? const Color(0xFF3E85FF)
-                               : const Color(0xFFFF9000), 
-                        width: 1
-                      ) 
-                    : null,
               ),
-              child: Column(
-              children: [
-                // 메인 카드 내용
-                Container(
-                  constraints: const BoxConstraints(minHeight: 169),
-                  padding: const EdgeInsets.all(23),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      // 매칭률 뱃지
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: category == '환경' ? const Color(0xFFD5F4E6)
-                                : category == '동물' ? const Color(0xFFDEEAFF)
-                                : const Color(0xFFFFEFD0),
-                          borderRadius: BorderRadius.circular(32),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              width: 16,
-                              height: 16,
-                              decoration: BoxDecoration(
-                                color: category == '환경' ? const Color(0xFF009C38)
-                                       : category == '동물' ? const Color(0xFF3E85FF)
-                                       : const Color(0xFFFF9000),
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(
-                                Icons.check,
-                                color: Colors.white,
-                                size: 10,
-                              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  border: isSelected 
+                      ? Border.all(
+                          color: category == '환경' ? const Color(0xFF009C38) 
+                                 : category == '동물' ? const Color(0xFF3E85FF)
+                                 : const Color(0xFFFF9000), 
+                          width: 1
+                        ) 
+                      : null,
+                ),
+                child: Column(
+                  children: [
+                    // 메인 카드 내용
+                    Container(
+                      constraints: const BoxConstraints(minHeight: 169),
+                      padding: const EdgeInsets.all(23),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // 매칭률 뱃지
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: category == '환경' ? const Color(0xFFD5F4E6)
+                                    : category == '동물' ? const Color(0xFFDEEAFF)
+                                    : const Color(0xFFFFEFD0),
+                              borderRadius: BorderRadius.circular(32),
                             ),
-                            const SizedBox(width: 2),
-                            Text(
-                              '매칭률 87%',
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  width: 16,
+                                  height: 16,
+                                  decoration: BoxDecoration(
+                                    color: category == '환경' ? const Color(0xFF009C38)
+                                           : category == '동물' ? const Color(0xFF3E85FF)
+                                           : const Color(0xFFFF9000),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                    size: 9.92,
+                                  ),
+                                ),
+                                const SizedBox(width: 2),
+                                Text(
+                                  '매칭률 87%',
+                                  style: TextStyle(
+                                    fontFamily: 'Pretendard',
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                    color: category == '환경' ? const Color(0xFF009C38)
+                                           : category == '동물' ? const Color(0xFF3E85FF)
+                                           : const Color(0xFFFF9000),
+                                    letterSpacing: -0.325,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          // 제목
+                          const Flexible(
+                            child: Text(
+                              '우리는 지금, 마지막 고래를 보고 있을지도 모릅니다',
                               style: TextStyle(
                                 fontFamily: 'Pretendard',
-                                fontSize: 13,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: category == '환경' ? const Color(0xFF009C38)
-                                       : category == '동물' ? const Color(0xFF3E85FF)
-                                       : const Color(0xFFFF9000),
-                                letterSpacing: -0.325,
+                                color: Color(0xFF1C1B1F),
+                                letterSpacing: -0.5,
+                                height: 1.4,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          // 기관 정보
+                          Flexible(
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 31,
+                                  height: 31,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(color: const Color(0xFFE8EBF1)),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Image.asset(
+                                      'assets/images/organization_logo.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                const Expanded(
+                                  child: Text(
+                                    '환경운동연합',
+                                    style: TextStyle(
+                                      fontFamily: 'Pretendard',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xFF969696),
+                                      letterSpacing: -0.4,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // 펼치기/접기 버튼 섹션
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        border: Border(top: BorderSide(color: Color(0xFFF2F2F2), width: 1)),
+                        borderRadius: BorderRadius.vertical(bottom: Radius.circular(4)),
+                      ),
+                      child: Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                if (isExpanded) {
+                                  expandedCards[category]?.remove(index);
+                                } else {
+                                  if (expandedCards[category] == null) {
+                                    expandedCards[category] = [];
+                                  }
+                                  expandedCards[category]!.add(index);
+                                }
+                              });
+                            },
+                            child: Container(
+                              height: 60,
+                              padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 18),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    '소중한 기부금 이렇게 사용합니다',
+                                    style: TextStyle(
+                                      fontFamily: 'Pretendard',
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xFF969696),
+                                      letterSpacing: -0.375,
+                                    ),
+                                  ),
+                                  Transform.rotate(
+                                    angle: isExpanded ? 3.14159 : 0,
+                                    child: const Icon(
+                                      Icons.keyboard_arrow_down,
+                                      size: 24,
+                                      color: Color(0xFF969696),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      // 제목
-                      const Flexible(
-                        child: Text(
-                          '우리는 지금, 마지막 고래를 보고 있을지도 모릅니다',
-                          style: TextStyle(
-                            fontFamily: 'Pretendard',
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF1C1B1F),
-                            letterSpacing: -0.5,
-                            height: 1.4,
                           ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      // 기관 정보
-                      Flexible(
-                        child: Row(
-                          children: [
+                          // 펼쳐진 내용
+                          if (isExpanded)
                             Container(
-                              width: 31,
-                              height: 31,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(color: const Color(0xFFE8EBF1)),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: Image.asset(
-                                  'assets/images/organization_logo.png',
-                                  fit: BoxFit.cover,
-                                ),
+                              width: double.infinity,
+                              padding: const EdgeInsets.fromLTRB(23, 0, 23, 24),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      '고래 서식지 현장 조사\n7,000,000원\n해양포유류보호법 제정을 위한 국회 토론회\n2,000,000원\n생태보전 활동가 활동비 (3개월)\n6,000,000원',
+                                      style: TextStyle(
+                                        fontFamily: 'Pretendard',
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: Color(0xFF969696),
+                                        letterSpacing: -0.4,
+                                        height: 1.4,
+                                      ),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 24),
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      '자세히 보기',
+                                      style: TextStyle(
+                                        fontFamily: 'Pretendard',
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color(0xFF969696),
+                                        letterSpacing: -0.375,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            const SizedBox(width: 8),
-                            const Expanded(
-                              child: Text(
-                                '환경운동연합',
-                                style: TextStyle(
-                                  fontFamily: 'Pretendard',
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFF969696),
-                                  letterSpacing: -0.4,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                // 펼치기/접기 버튼 섹션
-                Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    border: Border(top: BorderSide(color: Color(0xFFF2F2F2), width: 1)),
-                    borderRadius: BorderRadius.vertical(bottom: Radius.circular(4)),
-                  ),
-                  child: Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            if (isExpanded) {
-                              expandedCards[category]?.remove(index);
-                            } else {
-                              if (expandedCards[category] == null) {
-                                expandedCards[category] = [];
-                              }
-                              expandedCards[category]!.add(index);
-                            }
-                          });
-                        },
-                        child: Container(
-                          height: 60,
-                          padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 18),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                '소중한 기부금 이렇게 사용합니다',
-                                style: TextStyle(
-                                  fontFamily: 'Pretendard',
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xFF969696),
-                                  letterSpacing: -0.375,
-                                ),
-                              ),
-                              Transform.rotate(
-                                angle: isExpanded ? 3.14159 : 0,
-                                child: const Icon(
-                                  Icons.keyboard_arrow_down,
-                                  size: 24,
-                                  color: Color(0xFF969696),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      // 펼쳐진 내용
-                      if (isExpanded)
-                        Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.fromLTRB(23, 0, 23, 24),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  '고래 서식지 현장 조사\n7,000,000원\n해양포유류보호법 제정을 위한 국회 토론회\n2,000,000원\n생태보전 활동가 활동비 (3개월)\n6,000,000원',
-                                  style: TextStyle(
-                                    fontFamily: 'Pretendard',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color(0xFF969696),
-                                    letterSpacing: -0.4,
-                                    height: 1.4,
-                                  ),
-                                  textAlign: TextAlign.left,
-                                ),
-                              ),
-                              const SizedBox(height: 24),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  '자세히 보기',
-                                  style: TextStyle(
-                                    fontFamily: 'Pretendard',
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xFF969696),
-                                    letterSpacing: -0.375,
-                                    decoration: TextDecoration.underline,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              ],
               ),
             ),
           ),
