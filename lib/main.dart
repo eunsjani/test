@@ -21,21 +21,66 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF009C38)),
         fontFamily: 'Pretendard',
         textTheme: const TextTheme(
-          displayLarge: TextStyle(fontFamily: 'Pretendard'),
-          displayMedium: TextStyle(fontFamily: 'Pretendard'),
-          displaySmall: TextStyle(fontFamily: 'Pretendard'),
-          headlineLarge: TextStyle(fontFamily: 'Pretendard'),
-          headlineMedium: TextStyle(fontFamily: 'Pretendard'),
-          headlineSmall: TextStyle(fontFamily: 'Pretendard'),
-          titleLarge: TextStyle(fontFamily: 'Pretendard'),
-          titleMedium: TextStyle(fontFamily: 'Pretendard'),
-          titleSmall: TextStyle(fontFamily: 'Pretendard'),
-          bodyLarge: TextStyle(fontFamily: 'Pretendard'),
-          bodyMedium: TextStyle(fontFamily: 'Pretendard'),
-          bodySmall: TextStyle(fontFamily: 'Pretendard'),
-          labelLarge: TextStyle(fontFamily: 'Pretendard'),
-          labelMedium: TextStyle(fontFamily: 'Pretendard'),
-          labelSmall: TextStyle(fontFamily: 'Pretendard'),
+          displayLarge: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w600,
+          ),
+          displayMedium: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w600,
+          ),
+          displaySmall: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w600,
+          ),
+          headlineLarge: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w600,
+          ),
+          headlineMedium: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w600,
+          ),
+          headlineSmall: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w600,
+          ),
+          titleLarge: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w600,
+          ),
+          titleMedium: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w500,
+          ),
+          titleSmall: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w500,
+          ),
+          bodyLarge: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w400,
+          ),
+          bodyMedium: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w400,
+          ),
+          bodySmall: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w400,
+          ),
+          labelLarge: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w500,
+          ),
+          labelMedium: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w500,
+          ),
+          labelSmall: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ),
       home: const BottomNavigationWidget(),
