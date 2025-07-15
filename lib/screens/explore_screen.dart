@@ -33,13 +33,18 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
       body: Stack(
         children: [
           SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 122),
-                // 선택된 탭에 따른 컨텐츠 표시
-                if (selectedTabIndex == 0) _buildRecommendedContent(),
-                if (selectedTabIndex == 1) _buildDirectSearchContent(),
-              ],
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final isMobile = constraints.maxWidth < 768;
+                return Column(
+                  children: [
+                    SizedBox(height: isMobile ? 100 : 122),
+                    // 선택된 탭에 따른 컨텐츠 표시
+                    if (selectedTabIndex == 0) _buildRecommendedContent(isMobile: isMobile),
+                    if (selectedTabIndex == 1) _buildDirectSearchContent(),
+                  ],
+                );
+              },
             ),
           ),
           // Top Navigation
@@ -47,108 +52,113 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
             top: 0,
             left: 0,
             right: 0,
-            child: Container(
-              height: 130,
-              color: const Color(0xFFF6F6F6),
-              child: Column(
-                children: [
-                  const SizedBox(height: 65),
-                  // Tab Bar Style
-                  Container(
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: Color(0xFFE8EBF1),
-                          width: 1,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final isMobile = constraints.maxWidth < 768;
+                return Container(
+                  height: isMobile ? 108 : 130,
+                  color: const Color(0xFFF6F6F6),
+                  child: Column(
+                    children: [
+                      SizedBox(height: isMobile ? 50 : 65),
+                      // Tab Bar Style
+                      Container(
+                        width: double.infinity,
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: Color(0xFFE8EBF1),
+                              width: 1,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        // 추천 탭
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                selectedTabIndex = 0;
-                              });
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: selectedTabIndex == 0 ? const Color(0xFF1C1B1F) : Colors.transparent,
-                                    width: 2,
+                        child: Row(
+                          children: [
+                            // 추천 탭
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    selectedTabIndex = 0;
+                                  });
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(vertical: isMobile ? 12 : 16),
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: selectedTabIndex == 0 ? const Color(0xFF1C1B1F) : Colors.transparent,
+                                        width: 2,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/images/star_shine.svg',
+                                        width: isMobile ? 16 : 18,
+                                        height: isMobile ? 16 : 18,
+                                        colorFilter: ColorFilter.mode(
+                                          selectedTabIndex == 0 ? const Color(0xFF1C1B1F) : const Color(0xFF969696),
+                                          BlendMode.srcIn,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 6),
+                                      Text(
+                                        '추천',
+                                        style: TextStyle(
+                                          fontFamily: 'Pretendard',
+                                          fontSize: isMobile ? 16 : 18,
+                                          fontWeight: selectedTabIndex == 0 ? FontWeight.w600 : FontWeight.w500,
+                                          color: selectedTabIndex == 0 ? const Color(0xFF1C1B1F) : const Color(0xFF969696),
+                                          letterSpacing: -0.4,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(
-                                    'assets/images/star_shine.svg',
-                                    width: 18,
-                                    height: 18,
-                                    colorFilter: ColorFilter.mode(
-                                      selectedTabIndex == 0 ? const Color(0xFF1C1B1F) : const Color(0xFF969696),
-                                      BlendMode.srcIn,
+                            ),
+                            // 직접 찾기 탭
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    selectedTabIndex = 1;
+                                  });
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(vertical: isMobile ? 12 : 16),
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: selectedTabIndex == 1 ? const Color(0xFF1C1B1F) : Colors.transparent,
+                                        width: 2,
+                                      ),
                                     ),
                                   ),
-                                  const SizedBox(width: 6),
-                                  Text(
-                                    '추천',
+                                  child: Text(
+                                    '직접 찾기',
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontFamily: 'Pretendard',
-                                      fontSize: 18,
-                                      fontWeight: selectedTabIndex == 0 ? FontWeight.w600 : FontWeight.w500,
-                                      color: selectedTabIndex == 0 ? const Color(0xFF1C1B1F) : const Color(0xFF969696),
+                                      fontSize: isMobile ? 14 : 16,
+                                      fontWeight: selectedTabIndex == 1 ? FontWeight.w600 : FontWeight.w500,
+                                      color: selectedTabIndex == 1 ? const Color(0xFF1C1B1F) : const Color(0xFF969696),
                                       letterSpacing: -0.4,
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        // 직접 찾기 탭
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                selectedTabIndex = 1;
-                              });
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: selectedTabIndex == 1 ? const Color(0xFF1C1B1F) : Colors.transparent,
-                                    width: 2,
-                                  ),
-                                ),
-                              ),
-                              child: Text(
-                                '직접 찾기',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: 'Pretendard',
-                                  fontSize: 16,
-                                  fontWeight: selectedTabIndex == 1 ? FontWeight.w600 : FontWeight.w500,
-                                  color: selectedTabIndex == 1 ? const Color(0xFF1C1B1F) : const Color(0xFF969696),
-                                  letterSpacing: -0.4,
                                 ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                );
+              },
             ),
           ),
           // Bottom Section (only show for recommended tab)
@@ -157,94 +167,104 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
               bottom: 0,
               left: 0,
               right: 0,
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.white.withValues(alpha: 0),
-                      Colors.white.withValues(alpha: 0.6),
-                      Colors.white,
-                    ],
-                    stops: const [0.0, 0.3, 1.0],
-                  ),
-                ),
-                child: Container(
-                  color: Colors.white,
-                  padding: const EdgeInsets.fromLTRB(45, 20, 45, 20),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final isMobile = constraints.maxWidth < 768;
+                  return Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.white.withValues(alpha: 0),
+                          Colors.white.withValues(alpha: 0.6),
+                          Colors.white,
+                        ],
+                        stops: const [0.0, 0.3, 1.0],
+                      ),
+                    ),
+                    child: Container(
+                      color: Colors.white,
+                      padding: EdgeInsets.fromLTRB(
+                        isMobile ? 20 : 45, 
+                        isMobile ? 16 : 20, 
+                        isMobile ? 20 : 45, 
+                        isMobile ? 16 : 20
+                      ),
+                      child: Column(
                         children: [
-                          const Text(
-                            '남은 기부금 5,300원',
-                            style: TextStyle(
-                              fontFamily: 'Pretendard',
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: Color(0xFF969696),
-                              letterSpacing: -0.3,
-                            ),
-                          ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
-                                '지금 사용',
+                              Text(
+                                '남은 기부금 5,300원',
                                 style: TextStyle(
                                   fontFamily: 'Pretendard',
-                                  fontSize: 12,
+                                  fontSize: isMobile ? 11 : 12,
                                   fontWeight: FontWeight.w500,
-                                  color: Color(0xFF969696),
+                                  color: const Color(0xFF969696),
                                   letterSpacing: -0.3,
                                 ),
                               ),
-                              const SizedBox(width: 8),
-                              const Text(
-                                '5,200원',
-                                style: TextStyle(
-                                  fontFamily: 'Pretendard',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF1C1B1F),
-                                  letterSpacing: -0.5,
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              SvgPicture.asset(
-                                'assets/images/error.svg',
-                                width: 20,
-                                height: 20,
+                              Row(
+                                children: [
+                                  Text(
+                                    '지금 사용',
+                                    style: TextStyle(
+                                      fontFamily: 'Pretendard',
+                                      fontSize: isMobile ? 11 : 12,
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0xFF969696),
+                                      letterSpacing: -0.3,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    '5,200원',
+                                    style: TextStyle(
+                                      fontFamily: 'Pretendard',
+                                      fontSize: isMobile ? 18 : 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color(0xFF1C1B1F),
+                                      letterSpacing: -0.5,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  SvgPicture.asset(
+                                    'assets/images/error.svg',
+                                    width: isMobile ? 18 : 20,
+                                    height: isMobile ? 18 : 20,
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-                      Container(
-                        width: double.infinity,
-                        height: 58,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF1C1B1F),
-                          borderRadius: BorderRadius.circular(500),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            '이대로 기부하기',
-                            style: TextStyle(
-                              fontFamily: 'Pretendard',
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              letterSpacing: -0.4,
+                          SizedBox(height: isMobile ? 16 : 20),
+                          Container(
+                            width: double.infinity,
+                            height: isMobile ? 50 : 58,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF1C1B1F),
+                              borderRadius: BorderRadius.circular(500),
+                            ),
+                            child: Center(
+                              child: Text(
+                                '이대로 기부하기',
+                                style: TextStyle(
+                                  fontFamily: 'Pretendard',
+                                  fontSize: isMobile ? 14 : 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  letterSpacing: -0.4,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
+                    ),
+                  );
+                },
               ),
             ),
         ],
@@ -258,33 +278,41 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
     required Color color,
     required String image,
     double? width,
+    bool isMobile = false,
   }) {
+    final cardWidth = isMobile ? 160.0 : 190.0;
+    final cardHeight = isMobile ? 240.0 : 280.0;
+    final bgHeight = isMobile ? 160.0 : 190.0;
+    final imageSize = isMobile ? 60.0 : 79.0;
+    final statsWidth = isMobile ? 135.0 : 162.0;
+    final statsHeight = isMobile ? 80.0 : 99.0;
+    
     return SizedBox(
-      width: 190,
-      height: 280,
+      width: cardWidth,
+      height: cardHeight,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
           // Background rounded square
           Positioned(
-            top: 40,
+            top: isMobile ? 30 : 40,
             left: 0,
             child: Container(
-              width: 190,
-              height: 190,
+              width: cardWidth,
+              height: bgHeight,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(36),
+                borderRadius: BorderRadius.circular(isMobile ? 30 : 36),
               ),
             ),
           ),
           // Image at the top - overlapping the card
           Positioned(
             top: 0,
-            left: (190 - 79) / 2, // Center the image
+            left: (cardWidth - imageSize) / 2, // Center the image
             child: Container(
-              width: 79,
-              height: 78,
+              width: imageSize,
+              height: imageSize,
               child: Image.asset(
                 image,
                 fit: BoxFit.contain,
@@ -293,37 +321,37 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
           ),
           // Stats container with border - positioned behind badge
           Positioned(
-            top: 120,
-            left: (190 - 162) / 2, // Center the stats container
+            top: isMobile ? 100 : 120,
+            left: (cardWidth - statsWidth) / 2, // Center the stats container
             child: Container(
-              width: 162,
-              height: 99,
+              width: statsWidth,
+              height: statsHeight,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(24),
+                borderRadius: BorderRadius.circular(isMobile ? 20 : 24),
                 border: Border.all(color: const Color(0xFFF2F2F2)),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     '내 기부금의',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
-                      fontSize: 15,
+                      fontSize: isMobile ? 13 : 15,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFF969696),
+                      color: const Color(0xFF969696),
                       letterSpacing: -0.375,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  SizedBox(height: isMobile ? 2 : 4),
                   Text(
                     '$percentage 전달',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontFamily: 'Pretendard',
-                      fontSize: 24,
+                      fontSize: isMobile ? 20 : 24,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFF1C1B1F),
+                      color: const Color(0xFF1C1B1F),
                       letterSpacing: -0.6,
                     ),
                   ),
@@ -333,12 +361,15 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
           ),
           // Category badge - positioned on top with highest z-index
           Positioned(
-            top: 100,
+            top: isMobile ? 80 : 100,
             left: 0,
             right: 0,
             child: Center(
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding: EdgeInsets.symmetric(
+                  horizontal: isMobile ? 10 : 12, 
+                  vertical: isMobile ? 3 : 4
+                ),
                 decoration: BoxDecoration(
                   color: color == const Color(0xFFFF9000) ? const Color(0xFFFFEFD0)
                         : color == const Color(0xFF009C38) ? const Color(0xFFD5F4E6)
@@ -349,7 +380,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                   title,
                   style: TextStyle(
                     fontFamily: 'Pretendard',
-                    fontSize: 16,
+                    fontSize: isMobile ? 14 : 16,
                     fontWeight: FontWeight.bold,
                     color: color,
                     letterSpacing: -0.4,
@@ -371,6 +402,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
     required Color color,
     required Color backgroundColor,
     required bool isSelected,
+    bool isMobile = false,
   }) {
     return Column(
       children: [
@@ -757,7 +789,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
   }
 
   // 추천 탭 컨텐츠
-  Widget _buildRecommendedContent() {
+  Widget _buildRecommendedContent({bool isMobile = false}) {
     return Column(
       children: [
         // Hero Section
@@ -765,32 +797,37 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(29, 34, 29, 0),
+              padding: EdgeInsets.fromLTRB(
+                isMobile ? 20 : 29, 
+                isMobile ? 20 : 34, 
+                isMobile ? 20 : 29, 
+                0
+              ),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: SizedBox(
-                  width: 300,
+                  width: isMobile ? null : 300,
                   child: Text(
                     '지금까지 당신의 기부는 이렇게 흘러왔어요',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
-                      fontSize: 32,
+                      fontSize: isMobile ? 24 : 32,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFF1C1B1F),
+                      color: const Color(0xFF1C1B1F),
                       height: 1.3,
-                      letterSpacing: -0.8,
+                      letterSpacing: isMobile ? -0.6 : -0.8,
                     ),
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 26),
+            SizedBox(height: isMobile ? 20 : 26),
             // Cards Row - Horizontal Scrollable
             SizedBox(
-              height: 280,
+              height: isMobile ? 240 : 280,
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.only(left: 29),
+                padding: EdgeInsets.only(left: isMobile ? 20 : 29),
                 child: Row(
                   children: [
                     _buildCategoryCard(
@@ -799,64 +836,70 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                       color: const Color(0xFFFF9000),
                       image: 'assets/images/kids.png',
                       width: null,
+                      isMobile: isMobile,
                     ),
-                    const SizedBox(width: 20),
+                    SizedBox(width: isMobile ? 16 : 20),
                     _buildCategoryCard(
                       title: '환경',
                       percentage: '12%',
                       color: const Color(0xFF009C38),
                       image: 'assets/images/nature.png',
                       width: null,
+                      isMobile: isMobile,
                     ),
-                    const SizedBox(width: 20),
+                    SizedBox(width: isMobile ? 16 : 20),
                     _buildCategoryCard(
                       title: '동물',
                       percentage: '8%',
                       color: const Color(0xFF3E85FF),
                       image: 'assets/images/animal.png',
                       width: null,
+                      isMobile: isMobile,
                     ),
-                    const SizedBox(width: 29), // 오른쪽 패딩
+                    SizedBox(width: isMobile ? 20 : 29), // 오른쪽 패딩
                   ],
                 ),
               ),
             ),
           ],
         ),
-        const SizedBox(height: 54),
+        SizedBox(height: isMobile ? 40 : 54),
         // Tooltip positioned absolutely
         Padding(
-          padding: const EdgeInsets.only(left: 29),
+          padding: EdgeInsets.only(left: isMobile ? 20 : 29),
           child: Align(
             alignment: Alignment.centerLeft,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14.25, vertical: 8.55),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isMobile ? 12 : 14.25, 
+                    vertical: isMobile ? 7 : 8.55
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFF1C1B1F),
-                    borderRadius: BorderRadius.circular(35.62),
+                    borderRadius: BorderRadius.circular(isMobile ? 30 : 35.62),
                   ),
-                  child: const Text(
+                  child: Text(
                     '나에게 딱 맞는 이달의 기부',
                     style: TextStyle(
                       fontFamily: 'Pretendard',
-                      fontSize: 14,
+                      fontSize: isMobile ? 12 : 14,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xEDFFFFFF),
+                      color: const Color(0xEDFFFFFF),
                       letterSpacing: -0.35,
                     ),
                   ),
                 ),
                 Transform.translate(
-                  offset: const Offset(24, -1),
+                  offset: Offset(isMobile ? 20 : 24, -1),
                   child: Transform.rotate(
                     angle: 3.14159,
                     child: SvgPicture.asset(
                       'assets/images/polygon.svg',
-                      width: 21.25,
-                      height: 21.25,
+                      width: isMobile ? 18 : 21.25,
+                      height: isMobile ? 18 : 21.25,
                     ),
                   ),
                 ),
@@ -864,10 +907,10 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
             ),
           ),
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: isMobile ? 16 : 20),
         // Donation List
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 29),
+          padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 29),
           child: Column(
             children: [
               _buildDonationSection(
@@ -878,8 +921,9 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                 color: const Color(0xFFFFAA00),
                 backgroundColor: const Color(0xFFFFEFD0),
                 isSelected: true,
+                isMobile: isMobile,
               ),
-              const SizedBox(height: 54),
+              SizedBox(height: isMobile ? 40 : 54),
               _buildDonationSection(
                 number: '2',
                 category: '환경',
@@ -888,8 +932,9 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                 color: const Color(0xFF009C38),
                 backgroundColor: const Color(0xFFD5F4E6),
                 isSelected: true,
+                isMobile: isMobile,
               ),
-              const SizedBox(height: 54),
+              SizedBox(height: isMobile ? 40 : 54),
               _buildDonationSection(
                 number: '3',
                 category: '동물',
@@ -898,6 +943,7 @@ class _ExploreScreenState extends State<ExploreScreen> with TickerProviderStateM
                 color: const Color(0xFF3E85FF),
                 backgroundColor: const Color(0xFFDEEAFF),
                 isSelected: true,
+                isMobile: isMobile,
               ),
               const SizedBox(height: 200),
             ],
