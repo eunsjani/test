@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
   <title id="title">계정에 귀속되는 개인 쿠폰 인프라</title>
-  <desc id="desc">캠페인, 고객 보상, 관리자 지급이 공통 발급 기능으로 개인 쿠폰을 만들고, 결제 시 소유자와 상태를 다시 확인한 뒤 사용 기록에 남기는 구조</desc>
+  <desc id="desc">캠페인, 고객 보상, 관리자 지급이 개인 쿠폰을 만들고, 발급 당시 할인 조건을 고정한 뒤 결제 사용 기록과 연결하는 구조</desc>
   <defs>
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
       <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#18152b" flood-opacity="0.10"/>
@@ -67,9 +67,9 @@
     <rect x="642" y="555" width="315" height="60" rx="18" fill="#ffffff" fill-opacity="0.15"/>
     <text x="673" y="594" class="pill">ML-Q7K2M9XA · 내 계정 전용</text>
     <circle cx="651" cy="655" r="6" fill="#ded9ff"/>
-    <text x="672" y="663" class="hero-body">소유자 · 상태 · 만료 시각</text>
+    <text x="672" y="663" class="hero-body">소유자 · 발급 당시 할인 조건</text>
     <circle cx="651" cy="696" r="6" fill="#ded9ff"/>
-    <text x="672" y="704" class="hero-body">같은 발급 요청은 한 장으로 수렴</text>
+    <text x="672" y="704" class="hero-body">만료 · 취소 · 요청 멱등성</text>
   </g>
 
   <g filter="url(#shadow)">
@@ -91,6 +91,6 @@
     <circle cx="318" cy="820" r="22" fill="#eaf5ed"/>
     <path d="M308 820l7 7 14-17" fill="none" stroke="#2f8a4b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
     <text x="357" y="813" class="footer-title">코드를 알아도 다른 계정은 사용할 수 없습니다.</text>
-    <text x="357" y="842" class="footer-body">입력 검증과 실제 결제 트랜잭션에서 소유자·상태·만료를 다시 확인합니다.</text>
+    <text x="357" y="842" class="footer-body">입력 검증과 실제 결제 트랜잭션에서 소유자·만료·사용 기록을 다시 확인합니다.</text>
   </g>
 </svg>
