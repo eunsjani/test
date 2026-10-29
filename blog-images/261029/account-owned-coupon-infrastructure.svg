@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">계정에 귀속되는 개인 쿠폰 인프라</title>
+  <desc id="desc">캠페인, 고객 보상, 관리자 지급이 공통 발급 기능으로 개인 쿠폰을 만들고, 결제 시 소유자와 상태를 다시 확인한 뒤 사용 기록에 남기는 구조</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#18152b" flood-opacity="0.10"/>
+    </filter>
+    <linearGradient id="hero" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6c5ce7"/>
+      <stop offset="1" stop-color="#4436b8"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#7d74a8"/>
+    </marker>
+    <style>
+      text { font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; }
+      .eyebrow { font-size: 21px; font-weight: 700; letter-spacing: 2px; fill: #665d91; }
+      .title { font-size: 54px; font-weight: 800; fill: #211d36; }
+      .subtitle { font-size: 25px; font-weight: 500; fill: #6c6684; }
+      .source { font-size: 22px; font-weight: 700; fill: #3f3959; }
+      .step { font-size: 18px; font-weight: 800; fill: #6c5ce7; }
+      .card-title { font-size: 30px; font-weight: 800; fill: #211d36; }
+      .card-code { font-size: 19px; font-weight: 700; fill: #6c5ce7; }
+      .body { font-size: 22px; font-weight: 600; fill: #504a67; }
+      .hero-step { font-size: 18px; font-weight: 800; fill: #ded9ff; }
+      .hero-title { font-size: 32px; font-weight: 800; fill: #ffffff; }
+      .hero-code { font-size: 19px; font-weight: 700; fill: #ded9ff; }
+      .hero-body { font-size: 22px; font-weight: 600; fill: #f3f1ff; }
+      .pill { font-size: 19px; font-weight: 800; fill: #ffffff; }
+      .footer-title { font-size: 25px; font-weight: 800; fill: #211d36; }
+      .footer-body { font-size: 21px; font-weight: 600; fill: #5b5570; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="#f7f5fb"/>
+  <circle cx="1480" cy="70" r="250" fill="#eeeafd"/>
+  <circle cx="65" cy="865" r="190" fill="#edf6ef"/>
+
+  <text x="110" y="94" class="eyebrow">ACCOUNT-OWNED COUPON</text>
+  <text x="110" y="159" class="title">계정에 귀속되는 개인 쿠폰</text>
+  <text x="110" y="205" class="subtitle">발급 이유와 관계없이, 소유권 확인부터 결제 사용까지 하나의 공통 흐름으로 관리합니다.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="110" y="267" width="385" height="92" rx="28" fill="#ffffff"/>
+    <circle cx="157" cy="313" r="22" fill="#f0edff"/>
+    <path d="M147 313h20M157 303v20" stroke="#6c5ce7" stroke-width="4" stroke-linecap="round"/>
+    <text x="192" y="321" class="source">캠페인 · 고객 보상 · 관리자 지급</text>
+  </g>
+  <path d="M505 313 H610" stroke="#7d74a8" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="110" y="425" width="390" height="265" rx="32" fill="#ffffff"/>
+    <text x="145" y="470" class="step">01 · 할인 정의</text>
+    <text x="145" y="516" class="card-title">어떤 할인인가</text>
+    <text x="145" y="552" class="card-code">organization_codes</text>
+    <circle cx="154" cy="605" r="6" fill="#6c5ce7"/>
+    <text x="175" y="613" class="body">월간·연간 할인율</text>
+    <circle cx="154" cy="648" r="6" fill="#6c5ce7"/>
+    <text x="175" y="656" class="body">적용 기간과 첫 결제 조건</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="605" y="382" width="390" height="351" rx="36" fill="url(#hero)"/>
+    <text x="642" y="432" class="hero-step">02 · 개인 쿠폰</text>
+    <text x="642" y="482" class="hero-title">누구의 쿠폰인가</text>
+    <text x="642" y="519" class="hero-code">user_coupons</text>
+    <rect x="642" y="555" width="315" height="60" rx="18" fill="#ffffff" fill-opacity="0.15"/>
+    <text x="673" y="594" class="pill">ML-Q7K2M9XA · 내 계정 전용</text>
+    <circle cx="651" cy="655" r="6" fill="#ded9ff"/>
+    <text x="672" y="663" class="hero-body">소유자 · 상태 · 만료 시각</text>
+    <circle cx="651" cy="696" r="6" fill="#ded9ff"/>
+    <text x="672" y="704" class="hero-body">같은 발급 요청은 한 장으로 수렴</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1100" y="425" width="390" height="265" rx="32" fill="#ffffff"/>
+    <text x="1135" y="470" class="step">03 · 사용 기록</text>
+    <text x="1135" y="516" class="card-title">어디서 사용했나</text>
+    <text x="1135" y="552" class="card-code">organization_redemptions</text>
+    <circle cx="1144" cy="605" r="6" fill="#6c5ce7"/>
+    <text x="1165" y="613" class="body">결제와 쿠폰을 연결</text>
+    <circle cx="1144" cy="648" r="6" fill="#6c5ce7"/>
+    <text x="1165" y="656" class="body">중복 사용을 DB에서 차단</text>
+  </g>
+
+  <path d="M510 558 H585" stroke="#7d74a8" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <path d="M1015 558 H1080" stroke="#7d74a8" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="267" y="780" width="1066" height="80" rx="28" fill="#ffffff"/>
+    <circle cx="318" cy="820" r="22" fill="#eaf5ed"/>
+    <path d="M308 820l7 7 14-17" fill="none" stroke="#2f8a4b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="357" y="813" class="footer-title">코드를 알아도 다른 계정은 사용할 수 없습니다.</text>
+    <text x="357" y="842" class="footer-body">입력 검증과 실제 결제 트랜잭션에서 소유자·상태·만료를 다시 확인합니다.</text>
+  </g>
+</svg>
